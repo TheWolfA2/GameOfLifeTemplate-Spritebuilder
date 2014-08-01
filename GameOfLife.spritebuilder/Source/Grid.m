@@ -79,4 +79,60 @@ static const int GRID_ROWS = 8, GRID_COLUMNS = 10;
     return _gridArray[row][column];
 }
 
+
+
+-(void)evolveStep {
+    [self countNeighbors];
+    
+    [self updateCreatures];
+    
+    _generation++;
+}
+
+
+
+-(BOOL)isIndexValidForX:(int)x andY:(int)y {
+    return 0 <= x && x < GRID_COLUMNS && 0 <= y && y < GRID_ROWS;
+}
+
+
+-(void)countNeighbors {
+    for (int i = 0; i < GRID_ROWS; i++) {
+        for (int j = 0; j < GRID_COLUMNS; j++) {
+            Creature *currentCreature = _gridArray[i][j];
+            
+            currentCreature.livingNeighbors = 0;
+            
+            for (int x = (j - 1); x <= j + 1; x++) {
+                for (int y = i - 1; y <= i + 1; y++) {
+                    BOOL isValidIndex = [self isIndexValidForX:x andY:y];
+                    
+                    if (!(x == i && y == j) && isValidIndex)
+                    {
+                        Creature *neighbor = _gridArray[y][x];
+                        if (neighbor.isAlive)
+                            currentCreature.livingNeighbors++;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+-(void)updateCreatures {
+    for (int i = 0; i < GRID_ROWS; i++) {
+        for (int j = 0; j < GRID_COLUMNS; j++) {
+            Creature *currentCreature = _gridArray[i][j];
+            
+            if (currentCreature.livingNeighbors <= 1 || currentCreature.livingNeighbors >= 4) {
+                currentCreature.isAlive = NO;
+            } else{
+                currentCreature.isAlive = YES;
+            }
+        }
+    }
+}
+
+
 @end
