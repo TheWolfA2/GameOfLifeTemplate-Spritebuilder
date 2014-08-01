@@ -103,13 +103,12 @@ static const int GRID_ROWS = 8, GRID_COLUMNS = 10;
             
             currentCreature.livingNeighbors = 0;
             
-            for (int x = (j - 1); x <= j + 1; x++) {
-                for (int y = i - 1; y <= i + 1; y++) {
+            for (int y = i - 1; y <= i + 1; y++) {
+                for (int x = j - 1; x <= j + 1; j++) {
                     BOOL isValidIndex = [self isIndexValidForX:x andY:y];
-                    
-                    if (!(x == i && y == j) && isValidIndex)
-                    {
+                    if (!(y == i && x == j) && isValidIndex) {
                         Creature *neighbor = _gridArray[y][x];
+                        
                         if (neighbor.isAlive)
                             currentCreature.livingNeighbors++;
                     }
@@ -128,8 +127,7 @@ static const int GRID_ROWS = 8, GRID_COLUMNS = 10;
             if (currentCreature.livingNeighbors <= 1 || currentCreature.livingNeighbors >= 4) {
                 currentCreature.isAlive = NO;
             } else {
-                if (currentCreature.livingNeighbors == 3)
-                    currentCreature.isAlive = YES;
+                currentCreature.isAlive = YES;
             }
         }
     }
