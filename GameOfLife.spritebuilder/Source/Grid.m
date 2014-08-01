@@ -49,7 +49,8 @@ static const int GRID_ROWS = 8, GRID_COLUMNS = 10;
             // place creature in grid
             _gridArray[i][j] = creature;
             
-            creature.isAlive = YES;
+            //creature.isAlive = YES;
+            [creature setIsAlive:YES];
             
             // update row position
             x += _cellWidth;
