@@ -101,6 +101,7 @@ static const int GRID_ROWS = 8, GRID_COLUMNS = 10;
 
 
 -(void)countNeighbors {
+    _totalAlive = 0;
     for (int i = 0; i < GRID_ROWS; i++) {
         for (int j = 0; j < GRID_COLUMNS; j++) {
             Creature *currentCreature = _gridArray[i][j];
@@ -115,6 +116,7 @@ static const int GRID_ROWS = 8, GRID_COLUMNS = 10;
                         Creature *neighbor = _gridArray[x][y];
                         if (neighbor.isAlive)
                         {
+                            _totalAlive++;
                             currentCreature.livingNeighbors++;
                         }
                     }
@@ -126,7 +128,6 @@ static const int GRID_ROWS = 8, GRID_COLUMNS = 10;
 
 
 -(void)updateCreatures {
-    _totalAlive = 0;
     for (int i = 0; i < GRID_ROWS; i++) {
         for (int j = 0; j < GRID_COLUMNS; j++) {
             Creature *currentCreature = _gridArray[i][j];
