@@ -38,6 +38,7 @@ static const int GRID_ROWS = 8, GRID_COLUMNS = 10;
     for (int i = 0; i < GRID_ROWS; i++) {
         _gridArray[i] = [NSMutableArray array];
         
+        // new row, reset x position
         x = 0;
         for (int j = 0; j < GRID_COLUMNS; j++) {
             // initalize and set position of creature

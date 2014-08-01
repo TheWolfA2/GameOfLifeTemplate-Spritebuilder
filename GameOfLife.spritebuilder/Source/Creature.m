@@ -10,7 +10,7 @@
 
 @implementation Creature
 
--(id)initCreature {
+-(instancetype)initCreature {
     self = [super initWithImageNamed:@"GameOfLifeAssets/Assets/bubble.png"];
     
     if (self) {
