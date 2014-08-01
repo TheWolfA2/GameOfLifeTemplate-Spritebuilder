@@ -92,7 +92,9 @@ static const int GRID_ROWS = 8, GRID_COLUMNS = 10;
 
 
 -(BOOL)isIndexValidForX:(int)x andY:(int)y {
-    return 0 <= x && x < GRID_COLUMNS && 0 <= y && y < GRID_ROWS;
+    if (0 <= x && x < GRID_COLUMNS && 0 <= y && y < GRID_ROWS)
+        return YES;
+    return NO;
 }
 
 
