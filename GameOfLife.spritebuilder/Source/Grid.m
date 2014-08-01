@@ -50,9 +50,6 @@ static const int GRID_ROWS = 8, GRID_COLUMNS = 10;
             // place creature in grid
             _gridArray[i][j] = creature;
             
-            //creature.isAlive = YES;
-            [creature setIsAlive:YES];
-            
             // update row position
             x += _cellWidth;
         }
@@ -62,5 +59,24 @@ static const int GRID_ROWS = 8, GRID_COLUMNS = 10;
     }
 }
 
+
+-(void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
+    // get the touch location
+    CGPoint touchLocation = [touch locationInNode:self];
+    
+    // get the creature
+    Creature *creature = [self creatureForTouchPosition:touchLocation];
+    
+    // invert creature's state
+    creature.isAlive = !creature.isAlive;
+}
+
+
+-(Creature*)creatureForTouchPosition:(CGPoint)touchPosition {
+    int row = touchPosition.y / _cellHeight,
+        column = touchPosition.x / _cellWidth;
+    
+    return _gridArray[row][column];
+}
 
 @end
